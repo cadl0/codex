@@ -1,4 +1,10 @@
 namespace Sifuentes.Api.Models
 {
-    public record InventoryItem(int Id, string Code, string Description, int Quantity);
+    public class InventoryItem
+    {
+        public int Id { get; set; }
+        public string Code { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public int Quantity { get; set; }
+    }
 }
