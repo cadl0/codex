@@ -1,11 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Sifuentes.Api.Data;
-using Sifuentes.Api.Models;
+using AFKproject.Api.Data;
+using AFKproject.Api.Models;
 using System.Linq;
 using System.Text;
 
-namespace Sifuentes.Api.Controllers
+namespace AFKproject.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]

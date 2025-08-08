@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Sifuentes.Api.Models;
+using AFKproject.Api.Models;
 
-namespace Sifuentes.Api.Data
+namespace AFKproject.Api.Data
 {
     public class InventoryContext : DbContext
     {

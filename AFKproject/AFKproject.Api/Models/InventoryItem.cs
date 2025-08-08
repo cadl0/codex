@@ -1,4 +1,4 @@
-namespace Sifuentes.Api.Models
+namespace AFKproject.Api.Models
 {
     public class InventoryItem
     {
