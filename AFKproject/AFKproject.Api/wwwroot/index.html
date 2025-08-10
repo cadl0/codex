@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Inventory Test</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; }
+        form, .search { margin-bottom: 1rem; }
+        input { margin-right: .5rem; }
+    </style>
+</head>
+<body>
+    <h1>Inventory</h1>
+    <form id="addForm">
+        <input id="code" placeholder="Code" required />
+        <input id="desc" placeholder="Description" required />
+        <input id="qty" type="number" placeholder="Quantity" required />
+        <button type="submit">Add</button>
+    </form>
+
+    <div class="search">
+        <input id="search" placeholder="Search" />
+        <button id="searchBtn">Search</button>
+    </div>
+
+    <ul id="list"></ul>
+
+    <script>
+        async function load() {
+            const res = await fetch('/inventory');
+            const data = await res.json();
+            render(data);
+        }
+        function render(items) {
+            const ul = document.getElementById('list');
+            ul.innerHTML = '';
+            for (const item of items) {
+                const li = document.createElement('li');
+                li.textContent = `${item.code} - ${item.description} (${item.quantity})`;
+                ul.appendChild(li);
+            }
+        }
+        document.getElementById('addForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const item = {
+                code: document.getElementById('code').value,
+                description: document.getElementById('desc').value,
+                quantity: parseInt(document.getElementById('qty').value, 10)
+            };
+            await fetch('/inventory', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(item)
+            });
+            load();
+            e.target.reset();
+        });
+        document.getElementById('searchBtn').addEventListener('click', async () => {
+            const term = document.getElementById('search').value;
+            const res = await fetch('/inventory/search?term=' + encodeURIComponent(term));
+            const data = await res.json();
+            render(data);
+        });
+        load();
+    </script>
+</body>
+</html>

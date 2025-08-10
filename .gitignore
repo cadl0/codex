@@ -81,3 +81,7 @@ CHANGELOG.ignore.md
 # nix related
 .direnv
 .envrc
+
+# dotnet build outputs
+**/bin/
+**/obj/
